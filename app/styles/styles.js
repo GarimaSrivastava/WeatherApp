@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }, 
     tempHeader: {
         fontWeight: 'bold',
         alignSelf: 'center',
@@ -12,7 +15,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'center',
         fontSize: 40,
-        
     },
     weatherList: {
        padding: 10

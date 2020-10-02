@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableHighlight, FlatList, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, Fragment } from 'react';
+import { View, Text, TouchableHighlight, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
+import LottieView from 'lottie-react-native';
 import { getWeather } from './../services/apiService';
 import { styles } from './../styles/styles';
 
@@ -11,12 +12,20 @@ const WeatherScreen = (props) => {
    }
    
    useEffect(() => {
-    fetchWeather();
+     fetchWeather();
    },[])
    
    if(props.isLoading == true){
       return(
-          <ActivityIndicator style= {{alignSelf: 'center'}} size="large" color="#0000ff"/>
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <LottieView 
+                source={require('./../assests/226-splashy-loader.json')} 
+                autoPlay 
+                loop 
+                style={{
+                height: 150, 
+            }}/>
+          </View>
       )
    }
    else if(props.hasError == true){
@@ -31,11 +40,7 @@ const WeatherScreen = (props) => {
    }
    else{
     return(
-        <View>
-            <Text>Hello from weather app</Text>
-            <TouchableHighlight onPress = {async() => fetchWeather()}>
-                <Text>Get location</Text>
-            </TouchableHighlight>
+        <SafeAreaView>
             <Text style={styles.tempHeader}>{props.weatherDetails.todaysWeather.main.temp}</Text>
             <Text style={styles.cityHeader}>{props.weatherDetails.city}</Text>
             <FlatList
@@ -50,7 +55,7 @@ const WeatherScreen = (props) => {
                         </View>
                  }
              />
-        </View>
+        </SafeAreaView>
     )
    }
 }
