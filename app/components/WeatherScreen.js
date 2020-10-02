@@ -2,9 +2,9 @@ import React, { useState, useEffect, Fragment, useRef } from 'react';
 import { View, Text, TouchableHighlight, FlatList, ActivityIndicator, SafeAreaView, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import LottieView from 'lottie-react-native';
-import { getWeather } from './../services/apiService';
-import { styles } from './../styles/styles';
-import FadeInView from '../components/FadeInView';
+import { getWeather } from '../services/apiService';
+import { styles } from '../styles/styles';
+import FadeInView from './common/FadeInView';
 
 const WeatherScreen = (props) => {
 
@@ -20,7 +20,7 @@ const WeatherScreen = (props) => {
       return(
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <LottieView 
-                source={require('./../assests/226-splashy-loader.json')} 
+                source={require('../assests/226-splashy-loader.json')} 
                 autoPlay 
                 loop 
                 style={{

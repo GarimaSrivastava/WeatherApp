@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { StatusBar, SafeAreaView, View, Text } from 'react-native';
-import WeatherScreen from './app/containers/WeatherScreen';
+import WeatherScreen from './app/components/WeatherScreen';
 import { styles } from './app/styles/styles';
 
 const App = () => {
