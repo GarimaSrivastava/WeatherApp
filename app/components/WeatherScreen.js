@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { View, Text, TouchableHighlight, FlatList, ActivityIndicator, SafeAreaView } from 'react-native';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
+import { View, Text, TouchableHighlight, FlatList, ActivityIndicator, SafeAreaView, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import { getWeather } from './../services/apiService';
 import { styles } from './../styles/styles';
+import FadeInView from '../components/FadeInView';
 
 const WeatherScreen = (props) => {
 
@@ -41,16 +42,15 @@ const WeatherScreen = (props) => {
    else{
     return(
         <SafeAreaView>
-            <Text style={styles.tempHeader}>{props.weatherDetails.todaysWeather.main.temp}</Text>
-            <Text style={styles.cityHeader}>{props.weatherDetails.city}</Text>
+            <HeaderView {...props}/>
             <FlatList
                  key='weather' style= {styles.weatherList}
                  keyExtractor={({ id }, index) => { return index.toString() }}
-                 data={props.weatherDetails.list}
+                 data={props.weatherDetails.weatherList}
                  renderItem={
                      ({ item }) => 
                         <View style = {styles.itemContainer}> 
-                            <Text style= {styles.dateText}>{item.dt_txt}</Text>
+                            <Text style= {styles.dateText}>{item.dateText}</Text>
                             <Text style= {styles.tempText}>{item.main.temp}</Text>
                         </View>
                  }
@@ -60,6 +60,16 @@ const WeatherScreen = (props) => {
    }
 }
 
+const HeaderView = (props) =>{
+    return(
+        <FadeInView style= {styles.headerViewContainer}>
+            <Text style={styles.tempHeader}>{props.weatherDetails.todaysWeather.main.temp}</Text>
+            <Text style= {styles.dateHeader} >{props.weatherDetails.todaysWeather.dateText}</Text>
+            <Text style={styles.cityHeader}>{props.weatherDetails.city}</Text>
+        </FadeInView>
+    )
+}
+ 
 
 
 const mapStateToProps = state => ({

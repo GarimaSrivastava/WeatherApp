@@ -21,7 +21,25 @@ function fetchWeather(dispatch){
         let city = json.city.name;
         let list = json.list;
         let todaysWeather = json.list[0];
-        dispatch(setWeather({city, list, todaysWeather}));
+        
+        let prevDate = todaysWeather.dt_txt.split(" ")[0];
+        todaysWeather["dateText"] = (new Date(prevDate)).toDateString();
+        let weatherList = []
+
+        list.forEach(element => {
+            let currentDate = element.dt_txt.split(" ")[0];
+            if(prevDate == element.dt_txt.replace(element.dt_txt, currentDate)){
+                prevDate = currentDate;
+            }
+            else{
+                let date = new Date(currentDate);
+                element["dateText"] = date.toDateString();
+                weatherList.push(element);
+                prevDate = currentDate;
+            }
+        });
+
+        dispatch(setWeather({city, weatherList, todaysWeather}));
     })
     .catch(function(err){ 
         console.log(err);
