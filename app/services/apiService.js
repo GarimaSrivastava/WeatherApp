@@ -1,9 +1,9 @@
-import { setWeather, setError } from './../actions/weatherAction';
+import { setWeather, setError, setIsLoading } from './../actions/weatherAction';
 import Geolocation from '@react-native-community/geolocation';
 
 export const getWeather = () => {
     return async (dispatch) => {
-
+            dispatch(setIsLoading(true));
             Geolocation.getCurrentPosition(function(location){ 
                 longitude = location.coords.longitude;
                 latitude = location.coords.latitude;
@@ -38,7 +38,7 @@ function fetchWeather(dispatch){
                 prevDate = currentDate;
             }
         });
-
+        
         dispatch(setWeather({city, weatherList, todaysWeather}));
     })
     .catch(function(err){ 

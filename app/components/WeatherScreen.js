@@ -1,5 +1,5 @@
-import React, { useState, useEffect, Fragment, useRef } from 'react';
-import { View, Text, TouchableHighlight, FlatList, ActivityIndicator, SafeAreaView, Animated } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, Text, FlatList, SafeAreaView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import LottieView from 'lottie-react-native';
 import { getWeather } from '../services/apiService';
@@ -19,7 +19,7 @@ const WeatherScreen = (props) => {
    
    if(props.isLoading == true){
       return(
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <View style={styles.loaderContainer}>
             <LottieView 
                 source={require('../assests/226-splashy-loader.json')} 
                 autoPlay 
@@ -30,19 +30,14 @@ const WeatherScreen = (props) => {
           </View>
       )
    }
-   else if(props.hasError == true){
+    if(props.hasError == true){
     return(
-        <View>
-            <Text>{props.error}</Text>
-            <TouchableHighlight onPress = {async() => fetchWeather()}>
-                <Text>Reload</Text>
-            </TouchableHighlight>
-        </View>
+        <ErrorMessage {...props} onReload = {async() => fetchWeather()}/>
     )
    }
    else{
     return(
-        <SafeAreaView style= {[styles.container, {marginBottom: 20}]}>
+        <SafeAreaView style= {styles.weatherScreenContainer}>
             <HeaderView {...props}/>
             <FlatList
                  key='weather' style= {styles.weatherList}
@@ -77,6 +72,24 @@ const WeatherItem = (props) => {
                 <Text style= {styles.weatherText}>{props.weather.weather[0].main}</Text>
             </View>
         </SlideUpView>
+    )
+}
+
+const ErrorMessage = (props) => {
+    return(
+        <View style= {styles.errorContainer}>
+            <LottieView 
+                source={require('../assests/16605-error.json')} 
+                autoPlay 
+                loop 
+                style={{
+                height: 150,  
+            }}/>
+            <Text style= {styles.errorMessage}>Some error occured!!! Please try again or check the internet connection.</Text>
+            <TouchableOpacity style={styles.reloadButton} onPress = {props.onReload}>
+                <Text style={styles.reloadButtonText}>Reload</Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 

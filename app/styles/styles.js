@@ -4,8 +4,19 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1
     }, 
+    weatherScreenContainer: {
+        flex: 1,
+        backgroundColor: '#e0e0e0',
+        paddingBottom: 20
+    },
+    loaderContainer: {
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        backgroundColor: '#e0e0e0'
+    },
     headerViewContainer: {
-        backgroundColor: '#567ebf',
+        backgroundColor: '#b00c32',
         padding: 20,
         margin: 10,
         marginTop: 20,
@@ -38,14 +49,14 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 40,
         justifyContent: 'space-between',
-        backgroundColor: '#e4e7ed',
+        backgroundColor: '#c9b7bc',
         borderRadius: 15,
         margin: 10
     },
     dateText: {
         fontSize: 16,
         alignSelf: 'center',
-        color: '#011338',
+        color: '#570115',
         fontWeight: 'bold'
     },
     weatherContainer: {
@@ -54,11 +65,32 @@ export const styles = StyleSheet.create({
     tempText: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#04328f'
+        color: '#800320'
     },
     weatherText: {
         fontSize: 10,
-        color: '#04328f',
+        color: '#800320',
         alignSelf: 'center'
+    },
+    errorContainer: {
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        backgroundColor: '#e0e0e0'
+    },
+    errorMessage: {
+        fontSize: 16,
+        alignSelf: 'center',
+        textAlign: 'center',
+        color: '#570115',
+        fontWeight: 'bold'
+    },
+    reloadButton: {
+        padding: 20
+    },
+    reloadButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#800320'
     }
 })

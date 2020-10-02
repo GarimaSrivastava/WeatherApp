@@ -6,7 +6,8 @@ export const setWeather = makeActionCreator(
 )
 
 export const setIsLoading = makeActionCreator(
-    'SET_ISLOADING'
+    'SET_ISLOADING',
+    'isLoading'
 )
 
 export const setError = makeActionCreator(

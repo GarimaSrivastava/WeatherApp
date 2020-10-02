@@ -16,14 +16,14 @@ const weatherReducer = (state = initialState, action) => {
         case 'SET_ISLOADING':
             return{
                 ...state,
-                isLoading: !state.isLoading,
+                isLoading: action.isLoading,
                 hasError: false
             }
         case 'HAS_ERROR':
             return {
                 ...state,
                 isLoading: false,
-                hasError: true
+                hasError: action.hasError
             }
         default:
             return state;
