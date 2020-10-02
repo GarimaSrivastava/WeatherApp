@@ -36,14 +36,29 @@ export const styles = StyleSheet.create({
     itemContainer: {
         flex: 1,
         flexDirection: 'row',
-        padding: 20,
-        justifyContent: 'space-between'
+        padding: 40,
+        justifyContent: 'space-between',
+        backgroundColor: '#e4e7ed',
+        borderRadius: 15,
+        margin: 10
     },
     dateText: {
-        fontSize: 14,
-        alignSelf: 'center'
+        fontSize: 16,
+        alignSelf: 'center',
+        color: '#011338',
+        fontWeight: 'bold'
+    },
+    weatherContainer: {
+        flexDirection: 'column',
     },
     tempText: {
-        fontSize: 14,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#04328f'
+    },
+    weatherText: {
+        fontSize: 10,
+        color: '#04328f',
+        alignSelf: 'center'
     }
 })

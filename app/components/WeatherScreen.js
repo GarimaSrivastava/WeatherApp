@@ -5,6 +5,7 @@ import LottieView from 'lottie-react-native';
 import { getWeather } from '../services/apiService';
 import { styles } from '../styles/styles';
 import FadeInView from './common/FadeInView';
+import SlideUpView from './common/SlideUpView';
 
 const WeatherScreen = (props) => {
 
@@ -41,7 +42,7 @@ const WeatherScreen = (props) => {
    }
    else{
     return(
-        <SafeAreaView>
+        <SafeAreaView style= {[styles.container, {marginBottom: 20}]}>
             <HeaderView {...props}/>
             <FlatList
                  key='weather' style= {styles.weatherList}
@@ -49,10 +50,7 @@ const WeatherScreen = (props) => {
                  data={props.weatherDetails.weatherList}
                  renderItem={
                      ({ item }) => 
-                        <View style = {styles.itemContainer}> 
-                            <Text style= {styles.dateText}>{item.dateText}</Text>
-                            <Text style= {styles.tempText}>{item.main.temp}</Text>
-                        </View>
+                        <WeatherItem weather = {item}/>
                  }
              />
         </SafeAreaView>
@@ -64,13 +62,23 @@ const HeaderView = (props) =>{
     return(
         <FadeInView style= {styles.headerViewContainer}>
             <Text style={styles.tempHeader}>{props.weatherDetails.todaysWeather.main.temp}</Text>
-            <Text style= {styles.dateHeader} >{props.weatherDetails.todaysWeather.dateText}</Text>
+            <Text style= {styles.dateHeader} >{props.weatherDetails.todaysWeather.dateText} </Text>
             <Text style={styles.cityHeader}>{props.weatherDetails.city}</Text>
         </FadeInView>
     )
 }
  
-
+const WeatherItem = (props) => {
+    return(
+        <SlideUpView style = {styles.itemContainer}> 
+            <Text style= {styles.dateText}>{props.weather.dateText}</Text>
+            <View style= {styles.weatherContainer}>
+                <Text style= {styles.tempText}>{props.weather.main.temp}</Text>
+                <Text style= {styles.weatherText}>{props.weather.weather[0].main}</Text>
+            </View>
+        </SlideUpView>
+    )
+}
 
 const mapStateToProps = state => ({
     weatherDetails: state.weatherReducer.weatherList,

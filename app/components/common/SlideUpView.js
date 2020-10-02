@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
 import { Animated } from 'react-native';
 
-const FadeInView = (props) => {
-    const fadeAnim = useRef(new Animated.Value(0)).current  
+const SlideUpView = (props) => {
+    const slideUpValue = useRef(new Animated.Value(0)).current  
   
     React.useEffect(() => {
       Animated.timing(
-        fadeAnim,
+        slideUpValue,
         {
           toValue: 1,
           duration: 500,
@@ -14,13 +14,20 @@ const FadeInView = (props) => {
         },
         
       ).start();
-    }, [fadeAnim])
+    }, [slideUpValue])
   
     return (
       <Animated.View                 
         style={{
           ...props.style,
-          opacity: fadeAnim,         
+          transform: [
+            {
+              translateY: slideUpValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [600, 0]
+              })
+            }
+          ],       
         }}
       >
         {props.children}
@@ -28,4 +35,4 @@ const FadeInView = (props) => {
     );
   }
   
-  export default FadeInView;
+  export default SlideUpView;
